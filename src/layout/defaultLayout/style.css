@@ -1,0 +1,50 @@
+/* Wrapper geral */
+.layoutWrapper {
+    width: 100%;
+    min-height: 100vh;
+}
+
+/* Header fixo */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 64px;
+    background-color: #4096ff;
+    color: white;
+    text-align: center;
+    line-height: 64px;
+    z-index: 1000;
+}
+
+/* Footer fixo */
+.footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #4096ff;
+    color: white;
+    text-align: center;
+    line-height: 48px;
+    z-index: 1000;
+}
+
+/* Content ajustado para não sobrepor header e footer */
+.content {
+    padding-top: 64px;
+    /* Altura do header */
+    padding-bottom: 48px;
+    /* Altura do footer */
+    padding: 48px;
+    min-height: calc(100vh - 64px - 48px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Para cenários com conteúdo muito grande */
+.content>* {
+    width: 100%;
+}
