@@ -2,23 +2,19 @@ import {
   Layout,
   Breadcrumb,
   ConfigProvider,
-  Dropdown,
+  Menu,
   Space,
   theme as antdTheme,
-  Menu,
 } from "antd";
 import {
   HomeOutlined,
   CalendarOutlined,
   UserOutlined,
-  AppstoreOutlined,
-  DownOutlined,
 } from "@ant-design/icons";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { useMemo } from "react";
 import ThemeSwitcher from "../../components/ThemeSwitcher";
 import { useTheme } from "../../components/themeContext";
-import logoSmall from "../../assets/logoLightThemeSmall.png"
 
 const { Header, Content, Footer } = Layout;
 
@@ -34,14 +30,6 @@ const DefaultLayout = () => {
     { key: "/calendar", icon: <CalendarOutlined />, label: "Calendário" },
     { key: "/profile", icon: <UserOutlined />, label: "Perfil" },
   ];
-
-  const dropdownMenu = (
-    <Menu
-      onClick={({ key }) => navigate(key)}
-      selectedKeys={[location.pathname]}
-      items={menuItems}
-    />
-  );
 
   const pathSnippets = location.pathname.split("/").filter((i) => i);
   const breadcrumbItems = useMemo(() => {
@@ -72,7 +60,14 @@ const DefaultLayout = () => {
             : antdTheme.defaultAlgorithm,
       }}
     >
-      <Layout style={{ minHeight: "100vh" }}>
+      <Layout
+        style={{
+          height: "95vh",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
         <Header
           style={{
             background: "transparent",
@@ -80,31 +75,20 @@ const DefaultLayout = () => {
             alignItems: "center",
             padding: "0 24px",
             justifyContent: "space-between",
+            width: "393px",
+            height: 64,
           }}
         >
           <Space>
-            <img style={{width:"40px", height:"40px"}} src={logoSmall} alt="" />
-            <Dropdown overlay={dropdownMenu} trigger={["click"]}>
-              <a
-                onClick={(e) => e.preventDefault()}
-                style={{ color: token.colorText }}
-              >
-                {/* Ícone do App */}
-                <AppstoreOutlined
-                  style={{
-                    fontSize: 24,
-                  }}
-                />
-              </a>
-            </Dropdown>
+            <h1>Conta Certa</h1>
           </Space>
-
           <ThemeSwitcher />
         </Header>
 
         <Breadcrumb
           style={{
             padding: "8px 16px",
+            width: "393px",
           }}
           items={breadcrumbItems.map((item) => ({
             title: (
@@ -118,9 +102,37 @@ const DefaultLayout = () => {
           }))}
         />
 
-        <Content style={{ margin: "16px" }}>
+        <Content
+          style={{
+            width: "393px",
+            flex: 1,
+            overflowY: "auto",
+            padding: "16px",
+          }}
+        >
           <Outlet />
         </Content>
+
+        <Footer
+          style={{
+            padding: 0,
+            background: token.colorBgContainer,
+            width: "393px",
+            borderTop: `1px solid ${token.colorBorder}`,
+          }}
+        >
+          <Menu
+            mode="horizontal"
+            selectedKeys={[location.pathname]}
+            onClick={({ key }) => navigate(key)}
+            items={menuItems}
+            style={{
+              display: "flex",
+              justifyContent: "space-around",
+              border: "none",
+            }}
+          />
+        </Footer>
       </Layout>
     </ConfigProvider>
   );
