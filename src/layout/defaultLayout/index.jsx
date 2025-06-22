@@ -14,7 +14,7 @@ import {
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { useMemo } from "react";
 import { useTheme } from "../../components/themeContext";
-import ThemeSwitcher from "../../components/ThemeSwitcher";
+import SwitcherTheme from "../../components/themeSwitcher";
 
 const { Header, Content, Footer } = Layout;
 
@@ -82,7 +82,7 @@ const DefaultLayout = () => {
           <Space>
             <h1>Conta Certa</h1>
           </Space>
-          <ThemeSwitcher />
+          <SwitcherTheme />
         </Header>
 
         <Breadcrumb

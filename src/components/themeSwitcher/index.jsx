@@ -2,7 +2,7 @@ import { Switch, Tooltip } from "antd";
 import { BulbOutlined, BulbFilled } from "@ant-design/icons";
 import { useTheme } from "../themeContext";
 
-const ThemeSwitcher = () => {
+const SwitcherTheme = () => {
   const { theme, toggleTheme } = useTheme();
 
   return (
@@ -17,4 +17,4 @@ const ThemeSwitcher = () => {
   );
 };
 
-export default ThemeSwitcher;
+export default SwitcherTheme;
