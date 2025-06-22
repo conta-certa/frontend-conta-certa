@@ -1,23 +1,26 @@
 import { Card, Form, Input, Button } from "antd";
-import { authApi } from "../../services/authApi";
+import { userApi } from "../../services/userApi";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
-const LoginPage = () => {
+const RegisterPage = () => {
   const navigate = useNavigate();
 
-  const handleLogin = async (values) => {
+  const handleRegister = async (values) => {
     try {
-      const { email, password } = values;
-      const { token, user } = await authApi.login(email, password);
+      const { name, email, password, phone } = values;
 
-      localStorage.setItem("token", token);
-      localStorage.setItem("userId", user.id);
+      await userApi.create({
+        name,
+        email,
+        password,
+        phone,
+      });
 
-      toast.success(`Bem vindo, ${user.name}!`);
-      navigate("/dashboard");
+      toast.success("Cadastro realizado com sucesso!");
+      navigate("/login");
     } catch (e) {
-      toast.error("Credenciais inválidas");
+      toast.error("Erro ao cadastrar.");
     }
   };
 
@@ -31,13 +34,27 @@ const LoginPage = () => {
         backgroundColor: "#0958d9",
       }}
     >
-      <Card title="Login" style={{ width: 300 }}>
-        <Form onFinish={handleLogin}>
+      <Card title="Cadastro" style={{ width: 300 }}>
+        <Form onFinish={handleRegister}>
+          <Form.Item
+            name="name"
+            rules={[{ required: true, message: "Digite seu nome" }]}
+          >
+            <Input placeholder="Nome" />
+          </Form.Item>
+
           <Form.Item
             name="email"
             rules={[{ required: true, message: "Digite seu email" }]}
           >
             <Input placeholder="E-mail" />
+          </Form.Item>
+
+          <Form.Item
+            name="phone"
+            rules={[{ required: true, message: "Digite seu telefone" }]}
+          >
+            <Input placeholder="Telefone" />
           </Form.Item>
 
           <Form.Item
@@ -49,13 +66,13 @@ const LoginPage = () => {
 
           <Form.Item>
             <Button type="primary" htmlType="submit" block>
-              Entrar
+              Cadastrar
             </Button>
           </Form.Item>
 
           <Form.Item>
-            <Button type="link" block onClick={() => navigate("/register")}>
-              Não tem uma conta? Cadastre-se
+            <Button type="link" block onClick={() => navigate("/login")}>
+              Já tem uma conta? Entrar
             </Button>
           </Form.Item>
         </Form>
@@ -64,4 +81,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default RegisterPage;
