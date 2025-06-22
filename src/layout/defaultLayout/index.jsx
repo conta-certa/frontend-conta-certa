@@ -13,8 +13,8 @@ import {
 } from "@ant-design/icons";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { useMemo } from "react";
-import ThemeSwitcher from "../../components/ThemeSwitcher/ThemeSwitcher";
 import { useTheme } from "../../components/themeContext";
+import ThemeSwitcher from "../../components/ThemeSwitcher";
 
 const { Header, Content, Footer } = Layout;
 
