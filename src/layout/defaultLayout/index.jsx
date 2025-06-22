@@ -13,7 +13,7 @@ import {
 } from "@ant-design/icons";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { useMemo } from "react";
-import ThemeSwitcher from "../../components/ThemeSwitcher";
+import ThemeSwitcher from "../../components/themeSwitcher/ThemeSwitcher";
 import { useTheme } from "../../components/themeContext";
 
 const { Header, Content, Footer } = Layout;
